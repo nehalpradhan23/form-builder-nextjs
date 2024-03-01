@@ -88,6 +88,7 @@ function Designer() {
   );
 }
 
+// individual dragged elements in designer =================================================
 function DesignerElementWrapper({ element }: { element: FormElementInstance }) {
   const { removeElement } = useDesigner();
   const [mouseIsOver, setMouseIsOver] = useState<boolean>(false);
