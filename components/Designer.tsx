@@ -19,7 +19,8 @@ import { Button } from "./ui/button";
 import { BiSolidTrash } from "react-icons/bi";
 
 function Designer() {
-  const { elements, addElement } = useDesigner();
+  const { elements, addElement, selectedElement, setSelectedElement } =
+    useDesigner();
 
   // DND ref for droppable area =======================
   const droppable = useDroppable({
@@ -54,7 +55,12 @@ function Designer() {
   // ===================================================
   return (
     <div className="flex w-full h-full">
-      <div className="p-4 w-full">
+      <div
+        className="p-4 w-full"
+        onClick={() => {
+          if (selectedElement) setSelectedElement(null);
+        }}
+      >
         <div
           ref={droppable.setNodeRef}
           className={cn(
@@ -90,7 +96,7 @@ function Designer() {
 
 // individual dragged elements in designer =================================================
 function DesignerElementWrapper({ element }: { element: FormElementInstance }) {
-  const { removeElement } = useDesigner();
+  const { removeElement, selectedElement, setSelectedElement } = useDesigner();
   const [mouseIsOver, setMouseIsOver] = useState<boolean>(false);
   // to sort elements ======================================
   const topHalf = useDroppable({
@@ -134,6 +140,10 @@ function DesignerElementWrapper({ element }: { element: FormElementInstance }) {
       className="relative h-[120px] flex flex-col text-foreground hover:cursor-pointer rounded-md ring-1 ring-accent ring-inset"
       onMouseEnter={() => setMouseIsOver(true)}
       onMouseLeave={() => setMouseIsOver(false)}
+      onClick={(e) => {
+        e.stopPropagation();
+        setSelectedElement(element);
+      }}
     >
       {/* creating sortable DND elements ============================== */}
       {/* for top half ================== */}
@@ -153,7 +163,8 @@ function DesignerElementWrapper({ element }: { element: FormElementInstance }) {
           <div className="absolute right-0 h-full">
             <Button
               variant={"outline"}
-              onClick={() => {
+              onClick={(e) => {
+                e.stopPropagation();
                 removeElement(element.id);
               }}
               className="flex justify-center h-full border rounded-md rounded-l-none bg-red-500"
