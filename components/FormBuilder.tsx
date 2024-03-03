@@ -1,6 +1,6 @@
 "use client";
 import { Form } from "@prisma/client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PreviewDialogBtn from "./PreviewDialogBtn";
 import SaveFormBtn from "./SaveFormBtn";
 import PublishFormBtn from "./PublishFormBtn";
@@ -13,8 +13,13 @@ import {
   useSensors,
 } from "@dnd-kit/core";
 import DragOverlayWrapper from "./DragOverlayWrapper";
+import useDesigner from "./hooks/useDesigner";
+import { ImSpinner } from "react-icons/im";
 
 function FormBuilder({ form }: { form: Form }) {
+  const { setElements } = useDesigner();
+
+  const [isReady, setIsReady] = useState(false);
   // sensors for drag vs click event
   const mouseSensor = useSensor(MouseSensor, {
     activationConstraint: {
@@ -29,6 +34,22 @@ function FormBuilder({ form }: { form: Form }) {
     },
   });
   const sensors = useSensors(mouseSensor, touchSensor);
+
+  useEffect(() => {
+    if (isReady) return;
+    const elements = JSON.parse(form.content);
+    setElements(elements);
+    const readyTimeout = setTimeout(() => setIsReady(true), 400);
+    return () => clearTimeout(readyTimeout);
+  }, [form, setElements]);
+
+  if (!isReady) {
+    return (
+      <div className="flex flex-col items-center justify-center w-full h-full">
+        <ImSpinner className="animate-spin h-12 w-12" />
+      </div>
+    );
+  }
   // =======================================================
   return (
     <DndContext sensors={sensors}>
@@ -43,7 +64,7 @@ function FormBuilder({ form }: { form: Form }) {
             <PreviewDialogBtn />
             {!form.published && (
               <>
-                <SaveFormBtn />
+                <SaveFormBtn id={form.id} />
                 <PublishFormBtn />
               </>
             )}
