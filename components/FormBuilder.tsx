@@ -23,7 +23,7 @@ import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import Confetti from "react-confetti";
 
 function FormBuilder({ form }: { form: Form }) {
-  const { setElements } = useDesigner();
+  const { setElements, setSelectedElement } = useDesigner();
 
   const [isReady, setIsReady] = useState(false);
   // sensors for drag vs click event
@@ -45,9 +45,10 @@ function FormBuilder({ form }: { form: Form }) {
     if (isReady) return;
     const elements = JSON.parse(form.content);
     setElements(elements);
+    setSelectedElement(null);
     const readyTimeout = setTimeout(() => setIsReady(true), 400);
     return () => clearTimeout(readyTimeout);
-  }, [form, setElements]);
+  }, [form, setElements, isReady, setSelectedElement]);
 
   if (!isReady) {
     return (

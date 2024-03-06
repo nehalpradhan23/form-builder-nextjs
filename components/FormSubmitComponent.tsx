@@ -2,7 +2,7 @@
 import React, { useCallback, useRef, useState, useTransition } from "react";
 import { FormElementInstance, FormElements } from "./FormElements";
 import { Button } from "./ui/button";
-import { HiOutlineCursorClick } from "react-icons/hi";
+import { HiCursorClick, HiOutlineCursorClick } from "react-icons/hi";
 import { toast } from "./ui/use-toast";
 import { ImSpinner2 } from "react-icons/im";
 import { SubmitForm } from "@/actions/form";
@@ -106,10 +106,10 @@ function FormSubmitComponent({
           disabled={pending}
         >
           {!pending && (
-            <div className="">
-              <HiOutlineCursorClick className="mr-2" />
+            <>
+              <HiCursorClick className="mr-2" />
               Submit
-            </div>
+            </>
           )}
           {pending && <ImSpinner2 className="animate-spin" />}
         </Button>

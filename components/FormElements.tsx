@@ -1,16 +1,27 @@
+import { CheckboxFieldFormElement } from "./Fields/CheckBoxField";
+import { DateFieldFormElement } from "./Fields/DateField";
+import { NumberFieldFormElement } from "./Fields/NumberField";
+import { ParagprahFieldFormElement } from "./Fields/ParagraphField";
+import { SelectFieldFormElement } from "./Fields/SelectField";
+import { SeparatorFieldFormElement } from "./Fields/SeparatorField";
+import { SpacerFieldFormElement } from "./Fields/SpacerField";
+import { SubTitleFieldFormElement } from "./Fields/SubtitleField";
+import { TextAreaFormElement } from "./Fields/TextAreaField";
 import { TextFieldFormElement } from "./Fields/TextField";
+import { TitleFieldFormElement } from "./Fields/TitleField";
 
-export type ElementsType = "TextField";
-// | "TitleField"
-// | "SubTitleField"
-// | "ParagraphField"
-// | "SeparatorField"
-// | "SpacerField"
-// | "NumberField"
-// | "TextAreaField"
-// | "DateField"
-// | "SelectField"
-// | "CheckboxField";
+export type ElementsType =
+  | "TextField"
+  | "TitleField"
+  | "SubTitleField"
+  | "ParagraphField"
+  | "SeparatorField"
+  | "SpacerField"
+  | "NumberField"
+  | "TextAreaField"
+  | "DateField"
+  | "SelectField"
+  | "CheckboxField";
 
 export type SubmitFunction = (key: string, value: string) => void;
 
@@ -50,14 +61,14 @@ type FormElementsType = {
 
 export const FormElements: FormElementsType = {
   TextField: TextFieldFormElement,
-  //   TitleField: TitleFieldFormElement,
-  //   SubTitleField: SubTitleFieldFormElement,
-  //   ParagraphField: ParagprahFieldFormElement,
-  //   SeparatorField: SeparatorFieldFormElement,
-  //   SpacerField: SpacerFieldFormElement,
-  //   NumberField: NumberFieldFormElement,
-  //   TextAreaField: TextAreaFormElement,
-  //   DateField: DateFieldFormElement,
-  //   SelectField: SelectFieldFormElement,
-  //   CheckboxField: CheckboxFieldFormElement,
+  TitleField: TitleFieldFormElement,
+  SubTitleField: SubTitleFieldFormElement,
+  ParagraphField: ParagprahFieldFormElement,
+  SeparatorField: SeparatorFieldFormElement,
+  SpacerField: SpacerFieldFormElement,
+  NumberField: NumberFieldFormElement,
+  TextAreaField: TextAreaFormElement,
+  DateField: DateFieldFormElement,
+  SelectField: SelectFieldFormElement,
+  CheckboxField: CheckboxFieldFormElement,
 };
