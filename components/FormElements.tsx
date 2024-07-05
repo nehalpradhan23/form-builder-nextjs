@@ -1,4 +1,4 @@
-import { CheckboxFieldFormElement } from "./Fields/CheckBoxField";
+import { CheckboxFieldFormElement } from "./Fields/CheckboxField";
 import { DateFieldFormElement } from "./Fields/DateField";
 import { NumberFieldFormElement } from "./Fields/NumberField";
 import { ParagprahFieldFormElement } from "./Fields/ParagraphField";
